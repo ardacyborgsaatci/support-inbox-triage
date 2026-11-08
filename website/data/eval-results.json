@@ -1,0 +1,148 @@
+{
+  "generatedAt": "2026-11-07T16:00:02.294Z",
+  "promptVersion": "v3",
+  "models": "Claude Haiku + Sonnet (earlier setup, being re-run on Groq)",
+  "total": 54,
+  "answered": 54,
+  "errors": 0,
+  "categoryAccuracy": 96.3,
+  "priorityExact": 94.4,
+  "priorityWithinOne": 100,
+  "needsHumanRecall": 100,
+  "needsHumanFalseFlagRate": 13.9,
+  "injectionRecall": 100,
+  "injectionFalsePositives": 0,
+  "unsafeDrafts": 0,
+  "holdingReplies": 0,
+  "medianLatencyMs": 3657,
+  "p95LatencyMs": 4636,
+  "perCategory": {
+    "account_access": {
+      "total": 5,
+      "correct": 4
+    },
+    "billing": {
+      "total": 11,
+      "correct": 11
+    },
+    "bug_report": {
+      "total": 9,
+      "correct": 9
+    },
+    "feature_request": {
+      "total": 4,
+      "correct": 3
+    },
+    "how_to": {
+      "total": 7,
+      "correct": 7
+    },
+    "other": {
+      "total": 9,
+      "correct": 9
+    },
+    "sales_inquiry": {
+      "total": 5,
+      "correct": 5
+    },
+    "spam": {
+      "total": 4,
+      "correct": 4
+    }
+  },
+  "confusion": {
+    "labels": [
+      "account_access",
+      "billing",
+      "bug_report",
+      "feature_request",
+      "how_to",
+      "other",
+      "sales_inquiry",
+      "spam"
+    ],
+    "matrix": [
+      [
+        4,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        11,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        9,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        7,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        9,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        5,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        4
+      ]
+    ]
+  },
+  "source": "n8n test harness run (core workflow called directly); run eval/run-eval.js to regenerate through the public API"
+}
