@@ -97,7 +97,7 @@
       grid.appendChild(card);
     });
     var when = data.generatedAt ? new Date(data.generatedAt).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : '';
-    byId('eval-note').textContent = 'Prompt ' + (data.promptVersion || '?') + (data.models ? ' · ' + data.models : '') + ' · ' + (data.total || 0) + ' emails' + (when ? ' · ' + when : '');
+    byId('eval-note').textContent = 'Prompt ' + (data.promptVersion || '?') + (data.models ? ' · ' + data.models : '') + (data.runNote ? ' · ' + data.runNote : '') + ' · ' + (data.total || 0) + ' emails' + (when ? ' · ' + when : '');
 
     var per = data.perCategory || {};
     bars('bars-eval', Object.keys(per).map(function (key) {

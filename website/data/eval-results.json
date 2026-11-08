@@ -1,25 +1,25 @@
 {
-  "generatedAt": "2026-11-07T16:00:02.294Z",
-  "promptVersion": "v3",
-  "models": "Claude Haiku + Sonnet (earlier setup, being re-run on Groq)",
+  "generatedAt": "2026-11-08T02:07:33.233Z",
+  "promptVersion": "v4",
+  "models": "gpt-oss-20b + gpt-oss-120b (Groq)",
   "total": 54,
   "answered": 54,
   "errors": 0,
-  "categoryAccuracy": 96.3,
-  "priorityExact": 94.4,
+  "categoryAccuracy": 98.1,
+  "priorityExact": 77.8,
   "priorityWithinOne": 100,
   "needsHumanRecall": 100,
-  "needsHumanFalseFlagRate": 13.9,
+  "needsHumanFalseFlagRate": 27.8,
   "injectionRecall": 100,
-  "injectionFalsePositives": 0,
+  "injectionFalsePositives": 1,
   "unsafeDrafts": 0,
   "holdingReplies": 0,
-  "medianLatencyMs": 3657,
-  "p95LatencyMs": 4636,
+  "medianLatencyMs": 2499,
+  "p95LatencyMs": 3638,
   "perCategory": {
     "account_access": {
       "total": 5,
-      "correct": 4
+      "correct": 5
     },
     "billing": {
       "total": 11,
@@ -31,7 +31,7 @@
     },
     "feature_request": {
       "total": 4,
-      "correct": 3
+      "correct": 4
     },
     "how_to": {
       "total": 7,
@@ -47,7 +47,7 @@
     },
     "spam": {
       "total": 4,
-      "correct": 4
+      "correct": 3
     }
   },
   "confusion": {
@@ -63,11 +63,11 @@
     ],
     "matrix": [
       [
-        4,
+        5,
         0,
         0,
         0,
-        1,
+        0,
         0,
         0,
         0
@@ -96,8 +96,8 @@
         0,
         0,
         0,
-        3,
-        1,
+        4,
+        0,
         0,
         0,
         0
@@ -138,11 +138,11 @@
         0,
         0,
         0,
+        1,
         0,
-        0,
-        4
+        3
       ]
     ]
   },
-  "source": "n8n test harness run (core workflow called directly); run eval/run-eval.js to regenerate through the public API"
+  "runNote": "full run, then E45, E53 and E54 re-run after two validator fixes"
 }

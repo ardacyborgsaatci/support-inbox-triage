@@ -17,7 +17,7 @@
       nodes.forEach(function (el) { el.textContent = format(data[el.dataset.metric], el.dataset.format); });
       if (note) {
         const when = data.generatedAt ? new Date(data.generatedAt).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : '';
-        note.textContent = 'Prompt ' + (data.promptVersion || '') + (data.models ? ', ' + data.models : '') + ', ' + (data.total || 0) + ' emails' + (when ? ', run ' + when : '');
+        note.textContent = 'Prompt ' + (data.promptVersion || '') + (data.models ? ', ' + data.models : '') + (data.runNote ? ', ' + data.runNote : '') + ', ' + (data.total || 0) + ' emails' + (when ? ', run ' + when : '');
       }
     })
     .catch(function () { if (note) note.textContent = 'Results are not available yet.'; });
