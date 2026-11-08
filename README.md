@@ -106,6 +106,7 @@ Untrusted email text goes to an LLM, so the design assumes it is hostile.
 | --- | --- |
 | Model unavailable, rate-limited or out of quota | The Core returns a fallback classification. The Demo API detects it and answers **503 `ai_unavailable`** with `Retry-After: 300`; the Vercel function passes that on and the page shows a plain message. Fallback rows have confidence 0 and are excluded from the feed. On the Gmail path the mail is still logged as `needs_review`, labelled `Triage/Needs-Human`, and gets a generic holding-reply draft, so a person still sees it. It is marked processed, so it is not retried automatically. |
 | Model returns invalid JSON | The Core retries once, then falls back as above. |
+| Burst of mail rate-limits the draft model | The draft step retries three times, 5 s apart. If it still fails, the draft becomes the holding reply, the mail is flagged for a person with the reason "draft model unavailable or rate-limited", and classification, labels and the log row are unaffected. |
 | Model returns nothing (reasoning used the whole token budget) | Treated like invalid JSON. If the rule-based injection screen had already flagged the mail, the Core returns a valid flagged result (low priority, needs a person, no draft) instead of an outage. |
 | Empty mail, or mail with no letters at all | Always routed to a person, whatever the model said. |
 | Draft fails the safety checks | A localised holding reply is used instead (English, Spanish, German, French, Portuguese) and the item is flagged. |
@@ -172,9 +173,10 @@ This checklist records what I actually checked. Update it after you run the rema
 - [x] Demo API 200 path with the Groq models, run from n8n: an English how-to (KB-based draft), a Spanish how-to (Spanish draft) and the injection preset (flagged, no draft).
 - [x] Eval on the Groq models (v4) through `eval/run-eval.js` against the public Demo API webhook with the secret; E45, E53 and E54 re-run after two validator fixes (see Measured results).
 - [ ] The 400 branch on its own.
-- [ ] Gmail end to end: labels, threaded drafts, dedupe, urgent alert, Sent folder clean.
-- [ ] `Apply Labels` accepting the label-id list (written to n8n's documented format, not yet seen running).
-- [ ] Daily digest email received; error alert received after a forced failure.
+- [x] Gmail end to end with 10 synthetic seed emails: labels applied, threaded drafts created in the right threads, no duplicates across later polls, urgent alerts received, and the Sent folder holds only the 10 seeds (to the +support alias) plus the owner-only alerts and digest. Eight drafts were written; the injection and spam seeds correctly got none. Two of those eight (a Spanish how-to and a bug report) fell back to a holding reply because Groq rate-limited the 120b model when nine mails arrived within 15 seconds. The retry settings were raised afterwards (3 tries, 5 s apart) and the reason now reads "draft model unavailable or rate-limited"; that burst was not repeated.
+- [x] `Apply Labels` accepting the label-id list (seen running on all ten seeds).
+- [x] Daily digest run manually and received (12 emails counted, themes summarised). The 08:00 schedule is now published.
+- [ ] Error alert received after a forced failure.
 - [ ] A clean full re-run of the eval after the validator fixes.
 - [x] Vercel deployment with live env vars; the site and `/api/feed` checked from outside.
 - [ ] A playground run typed by hand on the live site.
